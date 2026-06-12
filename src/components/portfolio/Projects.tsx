@@ -19,7 +19,9 @@ export default function Projects() {
         {siteConfig.projects.map((p, i) => (
           <motion.a
             key={p.id}
-            href="#agent"
+            href={(p as any).url ?? "#"}
+            target="_blank"
+            rel="noopener noreferrer"
             data-cursor="hover"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
