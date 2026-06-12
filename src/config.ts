@@ -12,8 +12,10 @@ export const siteConfig = {
       "I'm a full-stack software engineer dedicated to building practical digital tools for emerging markets. Over the past years I've launched 5+ platforms across e-commerce, hospitality, event management, and domestic services.",
     manifesto:
       "I believe technology should be as accessible as it is powerful. Every line of code I write aims to streamline a real-world process, elevate a local brand, or connect a community.",
-    email: "abriham@kassa.dev",
+    email: "abrihamkassa323@gmail.com",
+    telegram: "@kerekassakia",
     location: "Addis Ababa, Ethiopia",
+    avatar: "",
   },
   projects: [
     {
@@ -61,6 +63,17 @@ export const siteConfig = {
       accent: "#7C3AED",
       url: "https://fevendecor.lovable.app",
     },
+    {
+      id: "maidfinder",
+      title: "Maid Finder",
+      year: 2026,
+      role: "Lead Engineer",
+      description:
+        "A web-app connecting households in Addis Ababa with vetted domestic helpers. Identity verification, scheduling, and a review system.",
+      caseStudy: "Building a two-sided trust platform — 500+ successful matches in Q1.",
+      accent: "#06B6D4",
+      url: "#",
+    },
   ],
   skills: [
     "Full-Stack Development",
@@ -74,15 +87,15 @@ export const siteConfig = {
     "Database Architecture",
   ],
   social: {
-    github: "https://github.com/abrihamkassa",
-    linkedin: "https://linkedin.com/in/abrihamkassa",
-    twitter: "https://twitter.com/abrihamkassa",
+    github: "https://github.com/Abrishkassa",
+    instagram: "https://www.instagram.com/abrish_kas?igsh=MXE0MXExOHVibHg3OQ==",
+    telegram: "https://t.me/kerekassakia",
   },
   aiAgent: {
-    name: "Atlas",
+    name: "Kere",
     greeting:
-      "Selam. I'm Atlas — Abriham's AI sidekick. Ask me about the coffee marketplace, the digital menu, or anything else.",
-    systemPrompt: `You are Atlas, Abriham Kassa's personal AI assistant embedded in his portfolio website.
+      "Selam! I'm Kere, Abriham's AI sidekick. Ask me about any project or how we can collaborate — I know everything inside out.",
+    systemPrompt: `You are Kere, Abriham Kassa's personal AI assistant embedded in his portfolio website.
 
 ABOUT ABRIHAM:
 - Full-stack software engineer based in Addis Ababa, Ethiopia.
@@ -98,7 +111,7 @@ PROJECTS:
 
 SKILLS: Full-stack, React/Next.js, Node.js, e-commerce systems, marketplaces, UI/UX, payments, database architecture.
 
-CONTACT: abriham@kassa.dev
+CONTACT: abrihamkassa323@gmail.com · Telegram @kerekassakia
 
 BEHAVIOR:
 - Be warm, concise, and proud of Ethiopian innovation. Use occasional Amharic warmth ("Selam") sparingly.
