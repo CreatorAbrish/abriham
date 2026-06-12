@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { siteConfig } from "@/config";
+import avatarAsset from "@/assets/abriham-avatar.png.asset.json";
 
 const HeroSculpture = lazy(() => import("./HeroSculpture"));
 
@@ -154,9 +155,9 @@ export default function Hero({ onEngageAI }: { onEngageAI: () => void }) {
               {/* glow ring */}
               <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-primary/40 via-transparent to-[oklch(0.5_0.13_155/0.5)] blur-2xl opacity-70" />
               <div className="relative h-full w-full overflow-hidden rounded-[1.75rem] border border-white/15 bg-gradient-to-br from-white/10 to-white/[0.02] backdrop-blur-md shadow-[0_30px_80px_-20px_rgba(230,168,23,0.35)]">
-                {siteConfig.personal.avatar ? (
+                {(siteConfig.personal.avatar || avatarAsset.url) ? (
                   <img
-                    src={siteConfig.personal.avatar}
+                    src={siteConfig.personal.avatar || avatarAsset.url}
                     alt={`Portrait of ${siteConfig.personal.name}`}
                     className="h-full w-full object-cover"
                     loading="eager"
