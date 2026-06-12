@@ -54,7 +54,7 @@ export default function Hero({ onEngageAI }: { onEngageAI: () => void }) {
         <nav className="hidden gap-8 text-mono text-xs uppercase tracking-[0.25em] text-muted-foreground md:flex">
           <a href="#work" className="transition hover:text-foreground">Work</a>
           <a href="#about" className="transition hover:text-foreground">About</a>
-          <a href="#agent" className="transition hover:text-foreground">Atlas AI</a>
+          <a href="#agent" className="transition hover:text-foreground">Kere AI</a>
           <a href={`mailto:${siteConfig.personal.email}`} className="transition hover:text-foreground">Contact</a>
         </nav>
       </header>
@@ -111,7 +111,7 @@ export default function Hero({ onEngageAI }: { onEngageAI: () => void }) {
               data-cursor="hover"
               className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground transition hover:scale-[1.02]"
             >
-              <span className="relative z-10">Engage Atlas AI</span>
+              <span className="relative z-10">Engage Kere AI</span>
               <span className="relative z-10 inline-block transition group-hover:translate-x-1">→</span>
               <span className="absolute inset-0 -z-0 bg-gradient-to-r from-primary via-[oklch(0.92_0.15_88)] to-primary opacity-0 transition group-hover:opacity-100" />
             </button>
