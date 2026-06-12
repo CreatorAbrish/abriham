@@ -143,6 +143,42 @@ export default function Hero({ onEngageAI }: { onEngageAI: () => void }) {
           >
             <HeroSculpture />
           </Suspense>
+          {/* Portrait — glass-morphic frame, sculpture orbits around */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="pointer-events-none absolute inset-0 flex items-center justify-center"
+          >
+            <div className="relative h-[58%] aspect-[3/4] max-h-[420px]">
+              {/* glow ring */}
+              <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-primary/40 via-transparent to-[oklch(0.5_0.13_155/0.5)] blur-2xl opacity-70" />
+              <div className="relative h-full w-full overflow-hidden rounded-[1.75rem] border border-white/15 bg-gradient-to-br from-white/10 to-white/[0.02] backdrop-blur-md shadow-[0_30px_80px_-20px_rgba(230,168,23,0.35)]">
+                {siteConfig.personal.avatar ? (
+                  <img
+                    src={siteConfig.personal.avatar}
+                    alt={`Portrait of ${siteConfig.personal.name}`}
+                    className="h-full w-full object-cover"
+                    loading="eager"
+                  />
+                ) : (
+                  <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[radial-gradient(circle_at_50%_30%,oklch(0.82_0.16_82/0.25),transparent_70%)]">
+                    <div className="text-display text-6xl font-medium text-gradient-gold">AK</div>
+                    <div className="text-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                      portrait · uploading
+                    </div>
+                  </div>
+                )}
+                {/* inner gradient overlay */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+                {/* corner ticks */}
+                <div className="pointer-events-none absolute left-3 top-3 h-3 w-3 border-l border-t border-primary/70" />
+                <div className="pointer-events-none absolute right-3 top-3 h-3 w-3 border-r border-t border-primary/70" />
+                <div className="pointer-events-none absolute bottom-3 left-3 h-3 w-3 border-b border-l border-primary/70" />
+                <div className="pointer-events-none absolute bottom-3 right-3 h-3 w-3 border-b border-r border-primary/70" />
+              </div>
+            </div>
+          </motion.div>
           <div className="absolute bottom-4 right-4 text-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
             // Sculpted in code
           </div>
