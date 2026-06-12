@@ -12,8 +12,10 @@ export const siteConfig = {
       "I'm a full-stack software engineer dedicated to building practical digital tools for emerging markets. Over the past years I've launched 5+ platforms across e-commerce, hospitality, event management, and domestic services.",
     manifesto:
       "I believe technology should be as accessible as it is powerful. Every line of code I write aims to streamline a real-world process, elevate a local brand, or connect a community.",
-    email: "abriham@kassa.dev",
+    email: "abrihamkassa323@gmail.com",
+    telegram: "@kerekassakia",
     location: "Addis Ababa, Ethiopia",
+    avatar: "",
   },
   projects: [
     {
@@ -74,15 +76,15 @@ export const siteConfig = {
     "Database Architecture",
   ],
   social: {
-    github: "https://github.com/abrihamkassa",
-    linkedin: "https://linkedin.com/in/abrihamkassa",
-    twitter: "https://twitter.com/abrihamkassa",
+    github: "https://github.com/Abrishkassa",
+    instagram: "https://www.instagram.com/abrish_kas?igsh=MXE0MXExOHVibHg3OQ==",
+    telegram: "https://t.me/kerekassakia",
   },
   aiAgent: {
-    name: "Atlas",
+    name: "Kere",
     greeting:
-      "Selam. I'm Atlas — Abriham's AI sidekick. Ask me about the coffee marketplace, the digital menu, or anything else.",
-    systemPrompt: `You are Atlas, Abriham Kassa's personal AI assistant embedded in his portfolio website.
+      "Selam! I'm Kere, Abriham's AI sidekick. Ask me about any project or how we can collaborate — I know everything inside out.",
+    systemPrompt: `You are Kere, Abriham Kassa's personal AI assistant embedded in his portfolio website.
 
 ABOUT ABRIHAM:
 - Full-stack software engineer based in Addis Ababa, Ethiopia.
