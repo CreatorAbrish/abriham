@@ -26,6 +26,7 @@ export const siteConfig = {
       caseStudy:
         "From farm to cup — digitized the coffee supply chain, increasing transparency and farmer profits by ~18%.",
       accent: "#E6A817",
+      url: "https://darcho.vercel.app/",
     },
     {
       id: "mela",
@@ -36,6 +37,7 @@ export const siteConfig = {
         "Touch-friendly digital menu for restaurants and resorts. Real-time updates, multi-language, contactless QR ordering. Adopted by 10+ venues.",
       caseStudy: "Reduced table turnover time by 20% and significantly cut printing costs.",
       accent: "#0F5E3C",
+      url: "https://mela-dish-connect.abrihamkassa323.workers.dev/table/1",
     },
     {
       id: "emu",
@@ -46,6 +48,7 @@ export const siteConfig = {
         "Full-featured e-commerce platform for a growing furniture brand with 3D product previews, inventory, and integrated payments.",
       caseStudy: "Launched a premium digital storefront that lifted average order value 35%.",
       accent: "#B45309",
+      url: "https://emufurniturehawassa.com/",
     },
     {
       id: "feven",
@@ -56,6 +59,7 @@ export const siteConfig = {
         "Booking and storefront platform for event decorators. Visual catalog, direct bookings, and integrated business card.",
       caseStudy: "Empowered 30+ decor businesses to grow bookings by 60%.",
       accent: "#7C3AED",
+      url: "https://fevendecor.lovable.app",
     },
   ],
   skills: [
