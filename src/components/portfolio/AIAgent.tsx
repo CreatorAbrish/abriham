@@ -32,6 +32,18 @@ export default function AIAgent() {
     setInput("");
   };
 
+  // Listen for "Discuss with Kere" triggers from project cards.
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<{ prompt: string }>).detail;
+      if (!detail?.prompt) return;
+      document.getElementById("agent")?.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => sendMessage({ text: detail.prompt }), 350);
+    };
+    window.addEventListener("discuss-with-kere", handler as EventListener);
+    return () => window.removeEventListener("discuss-with-kere", handler as EventListener);
+  }, [sendMessage]);
+
   return (
     <section id="agent" className="relative mx-auto max-w-7xl px-6 py-32 md:px-12">
       <div className="mb-12 max-w-3xl">
@@ -39,10 +51,10 @@ export default function AIAgent() {
           ✦ Conversational layer
         </div>
         <h2 className="text-display text-[clamp(2.5rem,6vw,5rem)] font-medium">
-          Meet <span className="italic font-light text-gradient-gold">Atlas</span>.
+          Meet <span className="italic font-light text-gradient-gold">Kere</span>.
         </h2>
         <p className="mt-6 text-base text-muted-foreground md:text-lg">
-          Atlas is Abriham's portfolio AI — trained on every project, decision, and outcome. Ask anything.
+          Kere is Abriham's portfolio AI — trained on every project, decision, and outcome. Ask anything.
         </p>
       </div>
 
@@ -55,7 +67,7 @@ export default function AIAgent() {
                 <span className={`absolute inset-0 rounded-full ${isBusy ? "animate-ping bg-primary" : ""}`} />
                 <span className="relative h-2 w-2 rounded-full bg-primary" />
               </span>
-              atlas@kassa.dev — online
+              kere@kassa.dev — online
             </div>
             <div>v1.0</div>
           </div>
@@ -67,7 +79,7 @@ export default function AIAgent() {
             {messages.length === 0 && (
               <div className="text-foreground/90">
                 <span className="text-mono text-[10px] uppercase tracking-[0.3em] text-primary">
-                  atlas
+                  kere
                 </span>
                 <p className="mt-2 leading-relaxed cursor-caret">{siteConfig.aiAgent.greeting}</p>
               </div>
@@ -88,7 +100,7 @@ export default function AIAgent() {
                   >
                     <div className="text-mono text-[10px] uppercase tracking-[0.3em]">
                       <span className={isUser ? "text-muted-foreground" : "text-primary"}>
-                        {isUser ? "you" : "atlas"}
+                        {isUser ? "you" : "kere"}
                       </span>
                     </div>
                     <p className="mt-2 whitespace-pre-wrap leading-relaxed text-foreground/90">
@@ -102,7 +114,7 @@ export default function AIAgent() {
             {status === "submitted" && (
               <div className="mt-5">
                 <div className="text-mono text-[10px] uppercase tracking-[0.3em] text-primary">
-                  atlas
+                  kere
                 </div>
                 <div className="mt-2 flex gap-1">
                   {[0, 1, 2].map((i) => (
@@ -118,7 +130,7 @@ export default function AIAgent() {
 
             {error && (
               <p className="mt-5 text-mono text-xs text-destructive">
-                Atlas hit a snag — please try again in a moment.
+                Kere hit a snag — please try again in a moment.
               </p>
             )}
           </div>
@@ -151,7 +163,7 @@ export default function AIAgent() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask Atlas anything…"
+              placeholder="Ask Kere anything…"
               className="text-mono flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
               autoFocus
             />
@@ -173,7 +185,7 @@ export default function AIAgent() {
           </Suspense>
           <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5">
             <div className="text-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-              {isBusy ? "✦ Atlas is thinking" : active ? "✦ Listening" : "✦ Idle"}
+              {isBusy ? "✦ Kere is thinking" : active ? "✦ Listening" : "✦ Idle"}
             </div>
           </div>
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,transparent,oklch(0.07_0.005_60)_75%)]" />
