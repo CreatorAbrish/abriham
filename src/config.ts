@@ -63,6 +63,17 @@ export const siteConfig = {
       accent: "#7C3AED",
       url: "https://fevendecor.lovable.app",
     },
+    {
+      id: "maidfinder",
+      title: "Maid Finder",
+      year: 2026,
+      role: "Lead Engineer",
+      description:
+        "A web-app connecting households in Addis Ababa with vetted domestic helpers. Identity verification, scheduling, and a review system.",
+      caseStudy: "Building a two-sided trust platform — 500+ successful matches in Q1.",
+      accent: "#06B6D4",
+      url: "#",
+    },
   ],
   skills: [
     "Full-Stack Development",
@@ -100,7 +111,7 @@ PROJECTS:
 
 SKILLS: Full-stack, React/Next.js, Node.js, e-commerce systems, marketplaces, UI/UX, payments, database architecture.
 
-CONTACT: abriham@kassa.dev
+CONTACT: abrihamkassa323@gmail.com · Telegram @kerekassakia
 
 BEHAVIOR:
 - Be warm, concise, and proud of Ethiopian innovation. Use occasional Amharic warmth ("Selam") sparingly.
