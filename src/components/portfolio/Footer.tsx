@@ -29,6 +29,14 @@ export default function Footer() {
             >
               {siteConfig.personal.email}
             </a>
+            <a
+              href={`https://t.me/${siteConfig.personal.telegram.replace(/^@/, "")}`}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 block text-sm transition hover:text-primary"
+            >
+              Telegram {siteConfig.personal.telegram}
+            </a>
             <p className="mt-2 text-sm text-muted-foreground">{siteConfig.personal.location}</p>
           </div>
           <div>
