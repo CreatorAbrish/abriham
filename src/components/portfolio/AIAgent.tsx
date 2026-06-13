@@ -3,6 +3,26 @@ import { DefaultChatTransport } from "ai";
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config";
+import avatarAsset from "@/assets/abriham-avatar.png.asset.json";
+
+function KereAvatar({ className = "" }: { className?: string }) {
+  return (
+    <span
+      className={
+        "relative inline-flex h-6 w-6 shrink-0 overflow-hidden rounded-full border border-primary/40 bg-black ring-1 ring-primary/30 " +
+        className
+      }
+    >
+      <img
+        src={avatarAsset.url}
+        alt="Kere"
+        className="h-full w-full object-cover"
+        loading="lazy"
+      />
+      <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-[oklch(0.5_0.13_155/0.4)] mix-blend-overlay" />
+    </span>
+  );
+}
 
 const AgentVisual = lazy(() => import("./AgentVisual"));
 
@@ -78,7 +98,8 @@ export default function AIAgent() {
           >
             {messages.length === 0 && (
               <div className="text-foreground/90">
-                <span className="text-mono text-[10px] uppercase tracking-[0.3em] text-primary">
+                <span className="flex items-center gap-2 text-mono text-[10px] uppercase tracking-[0.3em] text-primary">
+                  <KereAvatar />
                   kere
                 </span>
                 <p className="mt-2 leading-relaxed cursor-caret">{siteConfig.aiAgent.greeting}</p>
@@ -98,7 +119,8 @@ export default function AIAgent() {
                     animate={{ opacity: 1, y: 0 }}
                     className="mt-5"
                   >
-                    <div className="text-mono text-[10px] uppercase tracking-[0.3em]">
+                    <div className="flex items-center gap-2 text-mono text-[10px] uppercase tracking-[0.3em]">
+                      {!isUser && <KereAvatar />}
                       <span className={isUser ? "text-muted-foreground" : "text-primary"}>
                         {isUser ? "you" : "kere"}
                       </span>
@@ -113,7 +135,8 @@ export default function AIAgent() {
 
             {status === "submitted" && (
               <div className="mt-5">
-                <div className="text-mono text-[10px] uppercase tracking-[0.3em] text-primary">
+                <div className="flex items-center gap-2 text-mono text-[10px] uppercase tracking-[0.3em] text-primary">
+                  <KereAvatar />
                   kere
                 </div>
                 <div className="mt-2 flex gap-1">
