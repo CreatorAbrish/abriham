@@ -107,8 +107,8 @@ function PortraitParticles({ active }: { active: boolean }) {
     activation.current += (targetAct - activation.current) * Math.min(1, delta * 3);
 
     const arr = ref.current.geometry.attributes.position.array as Float32Array;
-    const amp = 0.06 + activation.current * 0.35;
-    const swirl = 0.4 + activation.current * 1.2;
+    const amp = 0.04 + activation.current * 0.18;
+    const swirl = 0.4 + activation.current * 1.4;
 
     for (let i = 0; i < targets.length; i += 3) {
       const tx = targets[i];
