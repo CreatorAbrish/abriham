@@ -10,18 +10,18 @@ const GREEN = new THREE.Color("#0F5E3C");
  * Sample the avatar image into a set of particle target positions.
  * Brighter pixels => more likely to spawn a particle there.
  */
-function useAvatarTargets(src: string, sampleCount = 4500) {
+function useAvatarTargets(src: string, sampleCount = 6000) {
   const [targets, setTargets] = useState<Float32Array | null>(null);
   const [colors, setColors] = useState<Float32Array | null>(null);
 
   useEffect(() => {
     let cancelled = false;
     const img = new Image();
-    img.crossOrigin = "anonymous";
+    // Same-origin asset; skip crossOrigin to avoid CORS edge cases.
     img.src = src;
     img.onload = () => {
       if (cancelled) return;
-      const W = 180;
+      const W = 220;
       const H = Math.round((img.height / img.width) * W);
       const canvas = document.createElement("canvas");
       canvas.width = W;
@@ -36,7 +36,7 @@ function useAvatarTargets(src: string, sampleCount = 4500) {
       const aspect = W / H;
       // Rejection sampling weighted by brightness.
       let tries = 0;
-      while (points.length / 3 < sampleCount && tries < sampleCount * 40) {
+      while (points.length / 3 < sampleCount && tries < sampleCount * 60) {
         tries++;
         const x = Math.floor(Math.random() * W);
         const y = Math.floor(Math.random() * H);
@@ -47,8 +47,8 @@ function useAvatarTargets(src: string, sampleCount = 4500) {
         const a = data[i + 3] / 255;
         const lum = (0.299 * r + 0.587 * g + 0.114 * b) * a;
         // Favor mid-bright pixels (skin/features); skip near-black background.
-        if (lum < 0.08) continue;
-        if (Math.random() > lum * 1.1) continue;
+        if (lum < 0.12) continue;
+        if (Math.random() > Math.min(1, lum * 1.4)) continue;
 
         // Map to centered coordinates. Y inverted (image origin top-left).
         const px = (x / W - 0.5) * 2 * aspect * 1.2;
@@ -107,8 +107,8 @@ function PortraitParticles({ active }: { active: boolean }) {
     activation.current += (targetAct - activation.current) * Math.min(1, delta * 3);
 
     const arr = ref.current.geometry.attributes.position.array as Float32Array;
-    const amp = 0.06 + activation.current * 0.35;
-    const swirl = 0.4 + activation.current * 1.2;
+    const amp = 0.04 + activation.current * 0.18;
+    const swirl = 0.4 + activation.current * 1.4;
 
     for (let i = 0; i < targets.length; i += 3) {
       const tx = targets[i];
@@ -130,12 +130,12 @@ function PortraitParticles({ active }: { active: boolean }) {
     ref.current.geometry.attributes.position.needsUpdate = true;
 
     // Gentle parallax rotation.
-    ref.current.rotation.y = Math.sin(t * 0.3) * 0.15 + activation.current * Math.sin(t * 1.5) * 0.05;
-    ref.current.rotation.x = Math.sin(t * 0.25) * 0.05;
+      ref.current.rotation.y = Math.sin(t * 0.3) * 0.12 + activation.current * Math.sin(t * 1.5) * 0.04;
+      ref.current.rotation.x = Math.sin(t * 0.25) * 0.04;
 
     const mat = ref.current.material as THREE.PointsMaterial;
-    mat.size = 0.018 + activation.current * 0.012;
-    mat.opacity = 0.7 + activation.current * 0.25;
+      mat.size = 0.022 + activation.current * 0.014;
+      mat.opacity = 0.85 + activation.current * 0.15;
   });
 
   if (!targets || !colors || !live) return null;
