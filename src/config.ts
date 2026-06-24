@@ -9,9 +9,25 @@ export const siteConfig = {
     tagline:
       "Empowering Ethiopian businesses with intuitive, impactful software — from Sidama's coffee markets to Addis Ababa's service economy.",
     shortBio:
-      "I'm a full-stack software engineer dedicated to building practical digital tools for emerging markets. Over the past years I've launched 5+ platforms across e-commerce, hospitality, event management, and domestic services.",
+      "I'm a full-stack software engineer dedicated to building practical digital tools for emerging markets. I graduated from Wachemo University (Hosaena, Ethiopia) with a Bachelor's degree in Software Engineering, where I gained deep knowledge in SDLC, OOP, data structures, computer architecture, and modern software engineering practices. Currently based in Hawassa, I've built 5+ platforms using technologies like PostgreSQL and Supabase, and I'm actively expanding into CI/CD pipelines, Kubernetes, and enterprise frameworks (.NET, Spring Boot).",
     manifesto:
       "I believe technology should be as accessible as it is powerful. Every line of code I write aims to streamline a real-world process, elevate a local brand, or connect a community.",
+    education: {
+      degree: "Bachelor of Science in Software Engineering",
+      university: "Wachemo University",
+      location: "Hosaena, Ethiopia",
+      focus:
+        "Software Engineering tools & practices, Computer Design & Architecture, SDLC, OOP, Data Structures & Algorithms, Advanced Software Engineering",
+    },
+    currentLocation: "Hawassa, Ethiopia",
+    backendTech: "PostgreSQL, Supabase",
+    currentlyLearning: [
+      "CI/CD Pipelines",
+      "Kubernetes",
+      ".NET",
+      "Spring Boot",
+      "Enterprise-level services",
+    ],
     email: "abrihamkassa323@gmail.com",
     telegram: "@kerekassakia",
     location: "Addis Ababa, Ethiopia",
