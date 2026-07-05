@@ -63,6 +63,7 @@
   --color-coffee: var(--coffee);
   --font-display: "Space Grotesk", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-script: "Dancing Script", "Great Vibes", cursive;
 }
 
 :root {
@@ -199,6 +200,20 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+@utility text-script {
+  font-family: var(--font-script);
+  letter-spacing: -0.01em;
+}
+
+@utility nav-pill {
+  background: linear-gradient(180deg, rgba(20,20,26,0.72), rgba(12,12,16,0.6));
+  border: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(18px) saturate(160%);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.06) inset,
+    0 20px 40px -20px rgba(0,0,0,0.7);
 }
 
 @utility shimmer-border {
