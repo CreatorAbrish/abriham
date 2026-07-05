@@ -6,6 +6,7 @@ import AIAgent from "@/components/portfolio/AIAgent";
 import Footer from "@/components/portfolio/Footer";
 import CustomCursor from "@/components/portfolio/CustomCursor";
 import PlexusBackground from "@/components/portfolio/PlexusBackground";
+import PageLoader from "@/components/portfolio/PageLoader";
 import { siteConfig } from "@/config";
 
 export const Route = createFileRoute("/")({
@@ -29,6 +30,7 @@ function Index() {
 
   return (
     <main className="relative min-h-screen bg-background text-foreground antialiased">
+      <PageLoader />
       <PlexusBackground />
       <CustomCursor />
       <Hero onEngageAI={engageAI} />
