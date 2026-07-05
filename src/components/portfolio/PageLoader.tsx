@@ -6,32 +6,22 @@ import { useEffect, useState } from "react";
  * iris-wipe reveal that fades to hand off to the page.
  */
 export default function PageLoader() {
+  const [mounted, setMounted] = useState(false);
   const [phase, setPhase] = useState<"loading" | "opening" | "done">("loading");
 
   useEffect(() => {
-    let open: number;
-    const finish = () => {
-      setPhase("opening");
-      open = window.setTimeout(() => setPhase("done"), 1100);
-    };
-
-    if (document.readyState === "complete") {
-      const t = window.setTimeout(finish, 900);
-      return () => {
-        window.clearTimeout(t);
-        window.clearTimeout(open);
-      };
-    }
-    const onLoad = () => window.setTimeout(finish, 400);
-    window.addEventListener("load", onLoad);
-    // Safety fallback
-    const safety = window.setTimeout(finish, 3500);
+    setMounted(true);
+    const t1 = window.setTimeout(() => setPhase("opening"), 1100);
+    const t2 = window.setTimeout(() => setPhase("done"), 2000);
     return () => {
-      window.removeEventListener("load", onLoad);
-      window.clearTimeout(safety);
-      window.clearTimeout(open);
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
     };
   }, []);
+
+  // Client-only: don't render during SSR so a hydration hiccup can never
+  // leave the overlay stuck on top of the app.
+  if (!mounted) return null;
 
   return (
     <AnimatePresence>
