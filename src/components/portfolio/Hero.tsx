@@ -47,16 +47,23 @@ export default function Hero({ onEngageAI }: { onEngageAI: () => void }) {
       </div>
 
       {/* nav */}
-      <header className="absolute left-0 right-0 top-0 z-20 flex items-center justify-between px-6 py-6 md:px-12">
-        <div className="text-mono text-xs tracking-[0.3em] uppercase text-muted-foreground">
-          AK · {new Date().getFullYear()}
+      <header className="fixed left-1/2 top-4 z-30 w-[min(94vw,64rem)] -translate-x-1/2">
+        <div className="nav-pill flex items-center justify-between gap-4 rounded-full px-4 py-2 md:px-6 md:py-3">
+          <a href="#top" className="text-script text-2xl leading-none text-foreground md:text-3xl">
+            Abriham
+          </a>
+          <nav className="hidden items-center gap-2 text-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground md:flex">
+            <a href="#work" className="rounded-full px-3 py-1.5 transition hover:bg-white/5 hover:text-foreground">Work</a>
+            <a href="#agent" className="rounded-full px-3 py-1.5 transition hover:bg-white/5 hover:text-foreground">Kere AI</a>
+            <a href="#contact" className="rounded-full px-3 py-1.5 transition hover:bg-white/5 hover:text-foreground">Contact</a>
+          </nav>
+          <a
+            href={`mailto:${siteConfig.personal.email}`}
+            className="hidden rounded-full bg-primary px-4 py-1.5 text-mono text-[11px] uppercase tracking-[0.2em] text-primary-foreground transition hover:scale-[1.03] sm:inline-block"
+          >
+            Let's talk
+          </a>
         </div>
-        <nav className="hidden gap-8 text-mono text-xs uppercase tracking-[0.25em] text-muted-foreground md:flex">
-          <a href="#work" className="transition hover:text-foreground">Work</a>
-          <a href="#about" className="transition hover:text-foreground">About</a>
-          <a href="#agent" className="transition hover:text-foreground">Kere AI</a>
-          <a href={`mailto:${siteConfig.personal.email}`} className="transition hover:text-foreground">Contact</a>
-        </nav>
       </header>
 
       <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 items-center gap-8 px-6 py-32 md:px-12 lg:grid-cols-12">
