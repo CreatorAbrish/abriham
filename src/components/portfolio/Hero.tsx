@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { siteConfig } from "@/config";
 
 const HeroSculpture = lazy(() => import("./HeroSculpture"));
+const HeroNetwork3D = lazy(() => import("./HeroNetwork3D"));
 
 const SCRAMBLE = "ABRIHAM·KASSA·".split("");
 
@@ -44,6 +45,16 @@ export default function Hero({ onEngageAI }: { onEngageAI: () => void }) {
         <div className="absolute -left-32 top-1/4 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle_at_center,oklch(0.55_0.13_155/0.35),transparent_60%)] blur-3xl" />
         <div className="absolute -right-32 bottom-0 h-[40rem] w-[40rem] rounded-full bg-[radial-gradient(circle_at_center,oklch(0.82_0.16_82/0.30),transparent_60%)] blur-3xl" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_70%,oklch(0.07_0.005_60)_100%)]" />
+      </div>
+
+      {/* 3D network background */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <Suspense fallback={null}>
+          <HeroNetwork3D />
+        </Suspense>
+        {/* readability veil */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,oklch(0.07_0.005_60/0.55),transparent_65%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,oklch(0.07_0.005_60/0.15),transparent_30%,transparent_70%,oklch(0.07_0.005_60)_100%)]" />
       </div>
 
       {/* nav */}
