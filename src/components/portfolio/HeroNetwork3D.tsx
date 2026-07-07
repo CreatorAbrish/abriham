@@ -195,7 +195,6 @@ export default function HeroNetwork3D() {
       camera={{ position: [0, 0, 8], fov: 55 }}
       className="!absolute inset-0"
     >
-      <color attach="background" args={["#00000000"]} />
       <ambientLight intensity={0.4} />
       <pointLight position={[5, 5, 5]} intensity={0.6} color="#E6A817" />
       <pointLight position={[-5, -3, 4]} intensity={0.4} color="#3ABEFF" />
