@@ -52,9 +52,6 @@ export default function Hero({ onEngageAI }: { onEngageAI: () => void }) {
         <Suspense fallback={null}>
           <HeroNetwork3D />
         </Suspense>
-        {/* readability veil */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,oklch(0.07_0.005_60/0.55),transparent_65%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,oklch(0.07_0.005_60/0.15),transparent_30%,transparent_70%,oklch(0.07_0.005_60)_100%)]" />
       </div>
 
       {/* nav */}
