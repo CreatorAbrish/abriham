@@ -1,9 +1,12 @@
 import { motion } from "framer-motion";
+import { lazy, Suspense } from "react";
 import { siteConfig } from "@/config";
 import darchoAsset from "@/assets/projects/darcho.png.asset.json";
 import melaAsset from "@/assets/projects/mela.png.asset.json";
 import emuAsset from "@/assets/projects/emu.png.asset.json";
 import fevenAsset from "@/assets/projects/feven.png.asset.json";
+
+const HeroNetwork3D = lazy(() => import("./HeroNetwork3D"));
 
 const PROJECT_IMAGES: Record<string, string> = {
   darcho: darchoAsset.url,
@@ -19,7 +22,14 @@ export default function Projects() {
   };
 
   return (
-    <section id="work" className="relative mx-auto max-w-7xl px-6 py-32 md:px-12">
+    <section id="work" className="relative isolate overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <Suspense fallback={null}>
+          <HeroNetwork3D density={0.55} opacity={0.55} />
+        </Suspense>
+        <div className="absolute inset-0 bg-background/40" />
+      </div>
+      <div className="mx-auto max-w-7xl px-6 py-32 md:px-12">
       <div className="mb-16 flex items-end justify-between">
         <div>
           <div className="text-mono mb-4 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
@@ -111,6 +121,7 @@ export default function Projects() {
             />
           </motion.div>
         ))}
+      </div>
       </div>
     </section>
   );
