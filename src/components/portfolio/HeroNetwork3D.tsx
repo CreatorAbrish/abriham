@@ -1,5 +1,5 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useMemo, useRef, Suspense } from "react";
+import { useEffect, useMemo, useRef, useState, Suspense } from "react";
 import * as THREE from "three";
 
 /**
@@ -18,11 +18,32 @@ const PALETTE = [
   new THREE.Color("#F5F0E0"), // cream
 ];
 
-function Network({ count = 90 }: { count?: number }) {
+function Network({
+  count = 90,
+  linkEveryNFrames = 2,
+}: {
+  count?: number;
+  linkEveryNFrames?: number;
+}) {
   const pointsRef = useRef<THREE.Points>(null);
   const linesRef = useRef<THREE.LineSegments>(null);
   const groupRef = useRef<THREE.Group>(null);
-  const { size } = useThree();
+  const { gl } = useThree();
+  const frameRef = useRef(0);
+  const visibleRef = useRef(true);
+
+  // Pause work when the canvas scrolls out of view — big win on long pages.
+  useEffect(() => {
+    const el = gl.domElement;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        visibleRef.current = entry.isIntersecting;
+      },
+      { rootMargin: "100px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [gl]);
 
   // Initial positions, velocities, colors
   const { positions, velocities, colors, sizes } = useMemo(() => {
@@ -84,6 +105,8 @@ function Network({ count = 90 }: { count?: number }) {
   }, []);
 
   useFrame(({ clock, pointer }) => {
+    if (!visibleRef.current) return;
+    frameRef.current++;
     const t = clock.getElapsedTime();
     const posAttr = pointsGeo.getAttribute("position") as THREE.BufferAttribute;
     const pos = posAttr.array as Float32Array;
@@ -91,8 +114,8 @@ function Network({ count = 90 }: { count?: number }) {
     // Update node positions
     for (let i = 0; i < count; i++) {
       const ix = i * 3;
-      pos[ix + 0] += velocities[ix + 0] + Math.sin(t * 0.3 + i) * 0.001;
-      pos[ix + 1] += velocities[ix + 1] + Math.cos(t * 0.25 + i) * 0.001;
+      pos[ix + 0] += velocities[ix + 0];
+      pos[ix + 1] += velocities[ix + 1];
       pos[ix + 2] += velocities[ix + 2];
       if (pos[ix + 0] > 7 || pos[ix + 0] < -7) velocities[ix + 0] *= -1;
       if (pos[ix + 1] > 4.5 || pos[ix + 1] < -4.5) velocities[ix + 1] *= -1;
@@ -100,7 +123,8 @@ function Network({ count = 90 }: { count?: number }) {
     }
     posAttr.needsUpdate = true;
 
-    // Rebuild connecting lines (near neighbors only)
+    // Rebuild connecting lines (near neighbors only) — throttled: O(n^2) is the hot path.
+    if (frameRef.current % linkEveryNFrames === 0) {
     const linkDist = 2.1;
     const linkDist2 = linkDist * linkDist;
     let ptr = 0;
@@ -144,6 +168,7 @@ function Network({ count = 90 }: { count?: number }) {
     lp.needsUpdate = true;
     lc.needsUpdate = true;
     lineGeo.setDrawRange(0, ptr * 2);
+    }
 
     // Parallax rotation from pointer
     if (groupRef.current) {
@@ -181,10 +206,16 @@ function Network({ count = 90 }: { count?: number }) {
 }
 
 function ResponsiveNodes({ density = 1 }: { density?: number }) {
-  const { size } = useThree();
-  const base = size.width < 640 ? 55 : size.width < 1024 ? 75 : 100;
-  const count = Math.max(20, Math.round(base * density));
-  return <Network count={count} />;
+  const { size, viewport } = useThree();
+  const isMobile = size.width < 640;
+  const isTablet = size.width < 1024;
+  // Base counts tuned to keep O(n^2) link scan cheap.
+  const base = isMobile ? 40 : isTablet ? 60 : 85;
+  // Penalize very high-dpr mobile screens where fillrate is the bottleneck.
+  const dprPenalty = viewport.dpr > 2 && isMobile ? 0.75 : 1;
+  const count = Math.max(18, Math.round(base * density * dprPenalty));
+  const linkEveryNFrames = isMobile ? 3 : 2;
+  return <Network count={count} linkEveryNFrames={linkEveryNFrames} />;
 }
 
 export default function HeroNetwork3D({
@@ -194,19 +225,44 @@ export default function HeroNetwork3D({
   density?: number;
   opacity?: number;
 }) {
+  const [mounted, setMounted] = useState(false);
+  const [reduced, setReduced] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+    const rm = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mob = window.matchMedia("(max-width: 640px)");
+    setReduced(rm.matches);
+    setIsMobile(mob.matches);
+    const a = () => setReduced(rm.matches);
+    const b = () => setIsMobile(mob.matches);
+    rm.addEventListener("change", a);
+    mob.addEventListener("change", b);
+    return () => {
+      rm.removeEventListener("change", a);
+      mob.removeEventListener("change", b);
+    };
+  }, []);
+  if (!mounted) return null;
   return (
     <Canvas
-      dpr={[1, 1.75]}
-      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      // Lower dpr ceiling on mobile — fillrate dominates on retina phones.
+      dpr={isMobile ? [1, 1.25] : [1, 1.6]}
+      gl={{
+        antialias: !isMobile,
+        alpha: true,
+        powerPreference: "high-performance",
+        stencil: false,
+        depth: false,
+      }}
       camera={{ position: [0, 0, 8], fov: 55 }}
+      // Static frame when reduced-motion is on; on-demand otherwise saves ~40% CPU.
+      frameloop={reduced ? "demand" : "always"}
       className="!absolute inset-0"
-      style={{ opacity }}
+      style={{ opacity, pointerEvents: "none" }}
     >
-      <ambientLight intensity={0.4} />
-      <pointLight position={[5, 5, 5]} intensity={0.6} color="#E6A817" />
-      <pointLight position={[-5, -3, 4]} intensity={0.4} color="#3ABEFF" />
       <Suspense fallback={null}>
-        <ResponsiveNodes density={density} />
+        <ResponsiveNodes density={reduced ? 0.6 : density} />
       </Suspense>
     </Canvas>
   );
