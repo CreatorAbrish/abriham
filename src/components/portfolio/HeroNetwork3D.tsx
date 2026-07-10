@@ -180,26 +180,33 @@ function Network({ count = 90 }: { count?: number }) {
   );
 }
 
-function ResponsiveNodes() {
+function ResponsiveNodes({ density = 1 }: { density?: number }) {
   const { size } = useThree();
-  // scale node count with viewport for performance on mobile
-  const count = size.width < 640 ? 55 : size.width < 1024 ? 75 : 100;
+  const base = size.width < 640 ? 55 : size.width < 1024 ? 75 : 100;
+  const count = Math.max(20, Math.round(base * density));
   return <Network count={count} />;
 }
 
-export default function HeroNetwork3D() {
+export default function HeroNetwork3D({
+  density = 1,
+  opacity = 1,
+}: {
+  density?: number;
+  opacity?: number;
+}) {
   return (
     <Canvas
       dpr={[1, 1.75]}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       camera={{ position: [0, 0, 8], fov: 55 }}
       className="!absolute inset-0"
+      style={{ opacity }}
     >
       <ambientLight intensity={0.4} />
       <pointLight position={[5, 5, 5]} intensity={0.6} color="#E6A817" />
       <pointLight position={[-5, -3, 4]} intensity={0.4} color="#3ABEFF" />
       <Suspense fallback={null}>
-        <ResponsiveNodes />
+        <ResponsiveNodes density={density} />
       </Suspense>
     </Canvas>
   );

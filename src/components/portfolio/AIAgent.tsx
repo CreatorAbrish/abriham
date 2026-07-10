@@ -25,6 +25,7 @@ function KereAvatar({ className = "" }: { className?: string }) {
 }
 
 const AgentVisual = lazy(() => import("./AgentVisual"));
+const HeroNetwork3D = lazy(() => import("./HeroNetwork3D"));
 
 const SUGGESTIONS = [
   "Tell me about Darcho",
@@ -65,7 +66,14 @@ export default function AIAgent() {
   }, [sendMessage]);
 
   return (
-    <section id="agent" className="relative mx-auto max-w-7xl px-6 py-32 md:px-12">
+    <section id="agent" className="relative isolate overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <Suspense fallback={null}>
+          <HeroNetwork3D density={0.5} opacity={0.5} />
+        </Suspense>
+        <div className="absolute inset-0 bg-background/50" />
+      </div>
+      <div className="mx-auto max-w-7xl px-6 py-32 md:px-12">
       <div className="mb-12 max-w-3xl">
         <div className="text-mono mb-4 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
           ✦ Conversational layer
@@ -213,6 +221,7 @@ export default function AIAgent() {
           </div>
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,transparent,oklch(0.07_0.005_60)_75%)]" />
         </div>
+      </div>
       </div>
     </section>
   );

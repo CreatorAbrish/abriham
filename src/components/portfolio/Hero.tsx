@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { siteConfig } from "@/config";
 
-const HeroSculpture = lazy(() => import("./HeroSculpture"));
 const HeroNetwork3D = lazy(() => import("./HeroNetwork3D"));
 
 const SCRAMBLE = "ABRIHAM·KASSA·".split("");
@@ -50,7 +49,7 @@ export default function Hero({ onEngageAI }: { onEngageAI: () => void }) {
       {/* 3D network background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <Suspense fallback={null}>
-          <HeroNetwork3D />
+          <HeroNetwork3D density={1} opacity={1} />
         </Suspense>
       </div>
 
@@ -74,9 +73,9 @@ export default function Hero({ onEngageAI }: { onEngageAI: () => void }) {
         </div>
       </header>
 
-      <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 items-center gap-8 px-6 py-32 md:px-12 lg:grid-cols-12">
-        {/* Left: typography */}
-        <div className="lg:col-span-7">
+      <div className="relative z-10 mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 items-center gap-8 px-6 py-32 md:px-12">
+        {/* typography */}
+        <div>
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -147,20 +146,6 @@ export default function Hero({ onEngageAI }: { onEngageAI: () => void }) {
           >
             <span>{siteConfig.personal.role}</span>
           </motion.div>
-        </div>
-
-        {/* Right: 3D sculpture */}
-        <div className="relative h-[55vh] min-h-[420px] lg:col-span-5 lg:h-[80vh]">
-          <Suspense
-            fallback={
-              <div className="h-full w-full rounded-3xl bg-gradient-to-br from-card/40 to-transparent" />
-            }
-          >
-            <HeroSculpture />
-          </Suspense>
-          <div className="absolute bottom-4 right-4 text-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-            // Sculpted in code
-          </div>
         </div>
       </div>
 
