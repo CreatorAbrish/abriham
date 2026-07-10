@@ -222,6 +222,7 @@ export default function AIAgent() {
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,transparent,oklch(0.07_0.005_60)_75%)]" />
         </div>
       </div>
+      </div>
     </section>
   );
 }
