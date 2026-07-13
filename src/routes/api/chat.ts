@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import { env } from "cloudflare:workers";
-import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
+import { createGoogleAiProvider } from "@/lib/ai-gateway.server";
 import { checkRateLimit, type RateLimitKV } from "@/lib/rate-limit.server";
 import { siteConfig } from "@/config";
 
@@ -35,11 +35,11 @@ export const Route = createFileRoute("/api/chat")({
           return new Response("Message too long", { status: 413 });
         }
 
-        const key = process.env.LOVABLE_API_KEY;
-        if (!key) return new Response("Missing LOVABLE_API_KEY", { status: 500 });
+        const key = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+        if (!key) return new Response("Missing GOOGLE_GENERATIVE_AI_API_KEY", { status: 500 });
 
-        const gateway = createLovableAiGatewayProvider(key);
-        const model = gateway("google/gemini-3-flash-preview");
+        const google = createGoogleAiProvider(key);
+        const model = google("gemini-3.5-flash");
 
         const result = streamText({
           model,
