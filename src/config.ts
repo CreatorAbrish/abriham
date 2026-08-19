@@ -30,7 +30,7 @@ export const siteConfig = {
     ],
     email: "abrihamkassa323@gmail.com",
     telegram: "@kerekassakia",
-    location: "Addis Ababa, Ethiopia",
+    location: "Hawassa, Ethiopia",
     avatar: "",
   },
   projects: [
@@ -77,7 +77,7 @@ export const siteConfig = {
         "Booking and storefront platform for event decorators. Visual catalog, direct bookings, and integrated business card.",
       caseStudy: "Empowered 30+ decor businesses to grow bookings by 60%.",
       accent: "#7C3AED",
-      url: "https://fevendecor.lovable.app",
+      url: "https://tanstack-start-app.abrihamkassa323.workers.dev/",
     },
     {
       id: "maidfinder",
@@ -110,11 +110,11 @@ export const siteConfig = {
   aiAgent: {
     name: "Kere",
     greeting:
-      "Selam! I'm Kere, Abriham's AI sidekick. I can tell you about his academic journey at Wachemo University, his projects built with PostgreSQL and Supabase, or his current deep dive into CI/CD and Kubernetes. What would you like to know?",
+      "Selam! I'm Kere, Abriham's AI sidekick. I can tell you about his academic journey, his projects , or his current deep dive into. What would you like to know?",
     systemPrompt: `You are Kere, Abriham Kassa's personal AI assistant embedded in his portfolio website.
 
 ABOUT ABRIHAM:
-- Full-stack software engineer, currently based in Hawassa, Ethiopia (originally referenced as Addis Ababa for general location).
+- Full-stack software engineer, currently based in Hawassa, Ethiopia.
 - Builds practical digital tools for emerging markets, especially Ethiopia.
 - 5+ shipped platforms across e-commerce, hospitality, events, and services.
 - Manifesto: technology should be as accessible as it is powerful.

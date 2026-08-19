@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-12">
         <div className="md:col-span-7">
           <div className="text-mono mb-4 text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-            ✦ Get in touch
+             Get in touch
           </div>
           <a
             href={`mailto:${siteConfig.personal.email}`}
@@ -60,7 +60,7 @@ export default function Footer() {
       </div>
       <div className="mx-auto mt-20 flex max-w-7xl items-center justify-between text-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
         <span>© {new Date().getFullYear()} {siteConfig.personal.name}</span>
-        <span>Crafted with care · Addis Ababa</span>
+        <span>Crafted with care · Hawassa</span>
       </div>
     </footer>
   );
