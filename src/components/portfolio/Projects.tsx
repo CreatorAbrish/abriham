@@ -1,18 +1,18 @@
 import { motion } from "framer-motion";
 import { lazy, Suspense } from "react";
 import { siteConfig } from "@/config";
-import darchoAsset from "@/assets/projects/darcho.png.asset.json";
-import melaAsset from "@/assets/projects/mela.png.asset.json";
-import emuAsset from "@/assets/projects/emu.png.asset.json";
-import fevenAsset from "@/assets/projects/feven.png.asset.json";
+import darchoUrl from "@/assets/projects/darcho.png";
+import melaUrl from "@/assets/projects/mela.png";
+import emuUrl from "@/assets/projects/emu.png";
+import fevenUrl from "@/assets/projects/feven.png";
 
 const HeroNetwork3D = lazy(() => import("./HeroNetwork3D"));
 
 const PROJECT_IMAGES: Record<string, string> = {
-  darcho: darchoAsset.url,
-  mela: melaAsset.url,
-  emu: emuAsset.url,
-  feven: fevenAsset.url,
+    darcho: darchoUrl,
+  mela: melaUrl,
+  emu: emuUrl,
+  feven: fevenUrl,
 };
 
 export default function Projects() {

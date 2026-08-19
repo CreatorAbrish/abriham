@@ -3,7 +3,7 @@ import { DefaultChatTransport } from "ai";
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "@/config";
-import avatarAsset from "@/assets/abriham-avatar.png.asset.json";
+import avatarUrl from "@/assets/abriham-avatar.png";
 
 function KereAvatar({ className = "" }: { className?: string }) {
   return (
@@ -14,7 +14,7 @@ function KereAvatar({ className = "" }: { className?: string }) {
       }
     >
       <img
-        src={avatarAsset.url}
+        src={avatarUrl}
         alt="Kere"
         className="h-full w-full object-cover"
         loading="lazy"

@@ -1,7 +1,7 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import avatarAsset from "@/assets/abriham-avatar.png.asset.json";
+import avatarUrl from "@/assets/abriham-avatar.png";
 
 const GOLD = "#E6A817";
 const GREEN = "#0F5E3C";
@@ -59,7 +59,7 @@ function useDepthTexture(src: string) {
 function PortraitMesh({ active }: { active: boolean }) {
   const group = useRef<THREE.Group>(null);
   const mesh = useRef<THREE.Mesh>(null);
-  const data = useDepthTexture(avatarAsset.url);
+  const data = useDepthTexture(avatarUrl);
   const activation = useRef(0);
 
   // Build a displaced plane geometry once the depth map is ready.
